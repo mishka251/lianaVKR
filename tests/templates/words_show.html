@@ -1,0 +1,17 @@
+{%extends "menu.html" %}
+{%block head%}
+    <title>Слово</title>
+	{%endblock head%}
+
+	{%block body%}
+	<div name="english">
+	{{word.english}}
+	</div>
+
+		<div name="russian">
+		
+		{{word.russian}}
+	</div>
+	
+      <button type="submit">Далее</button>
+{%endblock body%}

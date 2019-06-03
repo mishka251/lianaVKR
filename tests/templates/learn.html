@@ -1,0 +1,55 @@
+{%extends "menu.html" %}
+{%block head%}
+    <title>Обучение</title>
+ {%endblock head%}
+ {%block body%}
+ 
+ <div class = "parent">
+ 
+ 
+ <table width="100%" cellspacing="0" cellpadding="5">
+   <tr> 
+    <td width="200" valign="top">
+	<div id = "rus">
+<p>
+<h3>
+Слово на русском
+</h3>
+</p>
+<p>
+<h2>
+{{word.russian}}
+</h2>
+</P>
+</div>
+
+<div id = "eng">
+<p>
+<h3>
+Слово на английском
+</h3>
+</p>
+<p>
+<h2>
+{{word.english}}
+</h2>
+</p>
+</div>
+	</td>
+	<td valign="top">
+	<div id = "pic">
+{% load static from staticfiles %}
+{% static word.picture as src %}
+<img src = "{{src}}" width="600" height="400">
+</div>  
+	
+	</td>
+   </tr>
+  </table>
+
+</div>
+
+<button onclick="window.location.reload()">
+Дальше
+</button>
+{%endblock body%}

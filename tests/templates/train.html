@@ -1,0 +1,140 @@
+{%extends "menu.html" %}
+{% block head %}
+  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <title>Тренировка</title>
+ {%endblock head%}
+ {%block body%}
+
+  <script>
+
+function submForm(){
+
+let url = "/words/check/";
+
+let inpRus = $('input[name="rus"]');
+let inpCSRF = $('input[name="csrfmiddlewaretoken"]');
+
+console.log(inpRus.val());
+
+let data = "eng={{word.english}}&rus="+inpRus.val()+"&csrfmiddlewaretoken="+inpCSRF.val();
+console.log(data);
+$.ajax(
+{
+type:"POST",
+url:url,
+data:data,
+success: function(res){
+    console.log(  res );
+	let jsOBJ = JSON.parse(res);
+	if(jsOBJ['state']=="Ok")
+	{
+	$('#testResult').html( '<p>Верно - это '+jsOBJ['rus']+'</p>');
+let src = jsOBJ['img'];
+	$('#resImg').attr('src',src);
+	}
+	else
+	{
+	let info = '<p>Неверно - это '+jsOBJ['rus']+'</p>';
+	
+		$('#testResult').html(info);
+let src = jsOBJ['img'];
+	$('#resImg').attr('src',src);
+	}
+	PopUpShow();// = 'display:block';
+	//window.location.reload();
+  }
+}
+);
+}
+
+
+  $(document).ready(function(){
+        //Скрыть PopUp при загрузке страницы    
+        PopUpHide();
+    });
+    //Функция отображения PopUp
+    function PopUpShow(){
+        $("#popup1").show();
+    }
+    //Функция скрытия PopUp
+    function PopUpHide(){
+        $("#popup1").hide();
+    }
+</script>
+<style>
+*{
+    font-family: Areal;
+}
+.b-container{
+    width:200px;
+    height:150px;
+    background-color: #ccc;
+    margin:0px auto;
+    padding:10px;
+    font-size:30px;
+    color: #fff;
+}
+.b-popup{
+    width:100%;
+    min-height:100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow:hidden;
+    position:fixed;
+    top:0px;
+}
+.b-popup .b-popup-content{
+    margin:40px auto 0px auto;
+    width:100px;
+    height: 40px;
+    padding:10px;
+    background-color: #c5c5c5;
+    border-radius:5px;
+    box-shadow: 0px 0px 10px #000;
+}
+</style>
+ <p>
+ <h2> 
+Переведите на русский слово
+<h1>
+<div id = "eng">
+{{word.english}}
+</div>
+</h1>
+</h2>
+</p>
+<form onsubmit="return false;">
+<p>
+{% csrf_token %}
+</p>
+<p>
+<label> Ваш ответ </label>
+<input type = "text" name = "rus">
+</p>
+<p>
+<button onclick="submForm()">
+Ответить
+</button>
+</p>
+</form>
+
+<div class="b-popup" id="popup1">
+    <div class="b-popup-content">
+        <p>
+		<div id="testResult">
+		Результат
+		</div>
+		<p>
+		<img id = "resImg" width = "300" height="200" src="">
+		<button onclick="window.location.reload()">
+Дальше
+</button>		
+		
+        </div>
+		
+
+    </div>
+</div>
+
+
+
+{%endblock body%}

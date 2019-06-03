@@ -1,0 +1,36 @@
+{%extends "menu.html" %}
+{%block head%}
+    <title>Регистрация</title>
+	{%endblock head%}
+
+	{%block body%}
+    <form action="" method="post">
+      {% csrf_token %}
+      <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+     {{ form.as_p }}
+	 <!--p>
+	 <label for="id_username">Логин:</label> 
+	 <input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username">
+	 <span class="helptext">Обязательное. Не больше 150 символов. Только буквы, цифры и @/./+/-/_ .</span></p>
+<p>
+<label for="id_password1">Пароль:</label>
+ <input type="password" name="password1" required="" id="id_password1">
+ <span class="helptext"></span>
+ </p>
+ <ul>
+ <li> Ваш пароль не может быть слишком похож на другие ваши личные данные.</li>
+ <li>Ваш пароль должен содержать не менее 8 символов.</li>
+ <li>Ваш пароль не может быть часто используемым паролем.</li>
+ <li>Ваш пароль не может быть полностью цифровым.</li>
+ </ul>
+ <p>
+ </p>
+<p>
+<label for="id_password2">Повторите пароль:</label> 
+<input type="password" name="password2" required="" id="id_password2">
+ <span class="helptext">Введите пароль повторно для проверки.</span>
+ </p>
+	   <input type="hidden" name="next" value="{{ next }}" /-->
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+{%endblock body%}

@@ -1,0 +1,20 @@
+{%extends "menu.html" %}
+{%block head%}
+    <title>Изучение</title>
+	{%endblock head%}
+
+	{%block body%}
+<div id = "text">
+<h1>
+Вы уже изучили все слова
+</h1>
+
+<a href="/words/train?id={{lesson.id}}>">
+Зайдите в тренировку по этому уроку
+</a>
+Или
+<a href="/words/less">
+ Выберите другой урок
+</a>
+</div>
+{%endblock body%}
